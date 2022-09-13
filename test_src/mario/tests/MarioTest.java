@@ -2,7 +2,9 @@ package mario.tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -34,13 +36,18 @@ public class MarioTest {
 
 	@Test
 	public void test() throws IOException {
+		InputStream sysInBackup = System.in; // backup System.in to restore it later
+		String input = Integer.toString(size) + "\n" + Integer.toString(pattern) + "\n";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
 		String actualOutput = SystemOutputUtils.capture(() -> {
-			Mario.main(new String[] { Integer.toString(size), Integer.toString(pattern) });
+			Mario.main(new String[] { });
 		});
 
 		List<String> actualCleanedLines = toCleanedMountainLines(actualOutput);
 		assertEquals(toSizeMessage(actualOutput, actualCleanedLines), expectedLines.size(), actualCleanedLines.size());
 		assertEquals(toEqualsMessage(actualOutput, actualCleanedLines), expectedLines, actualCleanedLines);
+		System.setIn(sysInBackup);
 	}
 
 	private String toSizeMessage(String actualOutput, List<String> actualCleanedLines) {
@@ -69,8 +76,11 @@ public class MarioTest {
 		// preserve the beginning whitespace
 		// remove the ending whitespace
 		// remove the empty lines
-		return LenientTextUtils.toCleanedLines(output, WhitespacePolicy.PRESERVE, WhitespacePolicy.CLEAN,
+		List<String> clean = LenientTextUtils.toCleanedLines(output, WhitespacePolicy.PRESERVE, WhitespacePolicy.CLEAN,
 				WhitespacePolicy.CLEAN);
+		
+		//remove first two lines as they are prompts
+		return clean.subList(2, clean.size());
 	}
 
 	@Parameterized.Parameters(name = "size: {0}; pattern: {1}; expected: {2}")

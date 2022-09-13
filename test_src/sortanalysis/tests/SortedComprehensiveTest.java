@@ -32,6 +32,7 @@ public class SortedComprehensiveTest {
 		List<String> actualTokens = tester.toOneAndOnlyOnePrefixedTokens();
 		List<String> expectedTokens = tester.getExpectedTokensAtDefaultLine();
 
+		//actualTokens = actualTokens.subList(originalValues.size() + 1, actualTokens.size());
 		int skipPrefixFromIndex = 1;
 		List<Integer> expectedValues = LenientTextUtils.toIntegers(expectedTokens, skipPrefixFromIndex);
 		List<Integer> actualValues = LenientTextUtils.toIntegers(actualTokens, skipPrefixFromIndex);

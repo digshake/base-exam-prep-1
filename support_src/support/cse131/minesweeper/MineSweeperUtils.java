@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -19,10 +21,16 @@ import test.cse131.Messages;
  */
 public class MineSweeperUtils {
 	public static String runMain(int colCount, int rowCount, double probability) throws IOException {
+		InputStream sysInBackup = System.in; // backup System.in to restore it later
+		String input = Integer.toString(colCount) + "\n" + Integer.toString(rowCount) + "\n" + Double.toString(probability) + "\n";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
 		return SystemOutputUtils.capture(() -> {
-			MineSweeper.main(new String[] { Integer.toString(colCount), Integer.toString(rowCount),
-					Double.toString(probability) });
+			MineSweeper.main(new String[] { });
+			System.setIn(sysInBackup);
+
 		});
+		
 	}
 
 	public static Optional<Integer>[][] toOptionalCounts(String output, List<List<String>> linesOfTokenLists, int colCount, int rowCount) {

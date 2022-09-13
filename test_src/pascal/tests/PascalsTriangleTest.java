@@ -2,7 +2,9 @@ package pascal.tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -31,11 +33,17 @@ public class PascalsTriangleTest {
 
 	@Test
 	public void test() throws IOException {
+		InputStream sysInBackup = System.in; // backup System.in to restore it later
+		String input = Integer.toString(N) + "\n";
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
 		String actualOutput = SystemOutputUtils.capture(() -> {
 			PascalsTriangle.main(new String[] { Integer.toString(N) });
 		});
+		System.setIn(sysInBackup);
 		List<List<String>> actualTokensLists = LenientTextUtils.toLinesOfTokenLists(actualOutput);
-
+		//one prompt
+		actualTokensLists = actualTokensLists.subList(1, actualTokensLists.size());
 		String sizeMessage = toSizeMessage(N, actualOutput, expectedTokensLists, actualTokensLists);
 		assertEquals(sizeMessage, expectedTokensLists.size(), actualTokensLists.size());
 		int lineIndex = 0;

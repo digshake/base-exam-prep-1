@@ -3,6 +3,8 @@ package speedlimit.tests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,8 +23,13 @@ public class SpeedLimitTestUtils {
 		try {
 			Class<?> cls = Class.forName("speedlimit.SpeedLimit");
 			Method method = cls.getMethod("main", String[].class);
-			Object arg = new String[] { Integer.toString(reportedMPH), Integer.toString(limitMPH) };
+			String input = Integer.toString(reportedMPH) + "\n" + Integer.toString(limitMPH) + "\n";
+			InputStream sysInBackup = System.in; // backup System.in to restore it later
+			ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+			System.setIn(in);
+			Object arg = new String[] { };
 			method.invoke(null, arg);
+			System.setIn(sysInBackup);
 		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
 				| SecurityException | ClassNotFoundException e) {
 			throw new RuntimeException(e);

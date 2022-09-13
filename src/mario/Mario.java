@@ -1,6 +1,6 @@
 package mario;
 
-import support.cse131.ArgsProcessor;
+import java.util.Scanner;
 
 public class Mario {
 
@@ -11,9 +11,11 @@ public class Mario {
 		// Don't change this and don't ask for any other inputs
 		// or testing will fail
 		//
-		ArgsProcessor ap = new ArgsProcessor(args);
-		int size = ap.nextInt("What size mountain do you want?");
-		int pattern = ap.nextInt("What pattern (1, 2, 3, or 4)?");
+		Scanner in = new Scanner(System.in);
+		System.out.println("What size mountain do you want?");
+		int size = in.nextInt();
+		System.out.println("What pattern (1, 2, 3, or 4)?");
+		int pattern = in.nextInt();
 
 		if (size < 1)
 			throw new IllegalArgumentException("Size must be at least 1");

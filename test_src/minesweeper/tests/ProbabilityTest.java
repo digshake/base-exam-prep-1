@@ -34,6 +34,8 @@ public class ProbabilityTest {
 		int colCount = 30 + random.nextInt(10);
 		String output = MineSweeperUtils.runMain(colCount, rowCount, probability);
 		List<List<String>> linesOfTokenLists = LenientTextUtils.toLinesOfTokenLists(output);
+		linesOfTokenLists = linesOfTokenLists.subList(3, linesOfTokenLists.size());
+
 		Optional<Integer>[][] optionalCounts = MineSweeperUtils.toOptionalCounts(output, linesOfTokenLists, colCount, rowCount);
 		int bombCount = 0;
 		for (int r = 0; r < rowCount; ++r) {

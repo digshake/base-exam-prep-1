@@ -1,8 +1,8 @@
 package minesweeper;
 
 import java.io.IOException;
+import java.util.Scanner;
 
-import support.cse131.ArgsProcessor;
 import support.cse131.minesweeper.MineSweeperUtils;
 import support.cse131.minesweeper.game.Model;
 import support.cse131.minesweeper.game.viz.Controller;
@@ -12,11 +12,13 @@ public class MineSweeperGame {
 
 	public static void main(String[] args) throws IOException {
 
-		ArgsProcessor ap = new ArgsProcessor(args);
-
-		int cols = ap.nextInt("How many columns?");
-		int rows = ap.nextInt("How many rows?");
-		double probability = ap.nextDouble("What is the probability of a bomb?");
+		Scanner in = new Scanner(System.in);
+		System.out.println("How many columns?");
+		int cols = in.nextInt();
+		System.out.println("How many rows?");
+		int rows = in.nextInt();
+		System.out.println("What is the probability of a mine?");
+		double probability = in.nextDouble();
 
 		//
 		// Run the student's game, capturing the output to create the game board

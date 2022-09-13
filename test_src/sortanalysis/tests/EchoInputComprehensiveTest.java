@@ -33,6 +33,7 @@ public class EchoInputComprehensiveTest {
 		PrefixedLineTester tester = new DsaPrefixedLineTester(originalValues, expectedOutput, DsaPrefixedLine.INPUT);
 		List<String> actualTokens = tester.toOneAndOnlyOnePrefixedTokens();
 
+		//actualTokens = actualTokens.subList(originalValues.size() + 1, actualTokens.size());
 		int skipPrefixFromIndex = 1;
 		List<Integer> actualValues = LenientTextUtils.toIntegers(actualTokens, skipPrefixFromIndex);
 

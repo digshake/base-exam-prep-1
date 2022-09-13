@@ -35,6 +35,9 @@ public class CountTest {
 	public void test() throws IOException {
 		String output = MineSweeperUtils.runMain(colCount, rowCount, probability);
 		List<List<String>> linesOfTokenLists = LenientTextUtils.toLinesOfTokenLists(output);
+		//remove first three lines as they are prompts
+		linesOfTokenLists = linesOfTokenLists.subList(3, linesOfTokenLists.size());
+		
 		Optional<Integer>[][] optionalCounts = MineSweeperUtils.toOptionalCounts(output, linesOfTokenLists, colCount,
 				rowCount);
 		for (int r = 0; r < optionalCounts.length; ++r) {

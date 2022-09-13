@@ -1,6 +1,8 @@
 package sortanalysis;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,15 +31,20 @@ public class DataSortingAndAnalysisTestSuite {
 	}
 
 	public static String invokeMainWithSizeAndContents(List<Integer> data) throws IOException {
-		String[] args = new String[data.size() + 1];
-		args[0] = Integer.toString(data.size());
 		int i = 1;
+		String input = Integer.toString(data.size()) + "\n";
 		for (int v : data) {
-			args[i] = Integer.toString(v);
+			input += Integer.toString(v) + "\n";
 			++i;
 		}
+		InputStream sysInBackup = System.in; // backup System.in to restore it later
+		ByteArrayInputStream in = new ByteArrayInputStream(input.getBytes());
+		System.setIn(in);
 		return SystemOutputUtils.capture(() -> {
-			DataSortingAndAnalysis.main(args);
+			
+			DataSortingAndAnalysis.main(new String[] {});
+			System.setIn(sysInBackup);
+
 		});
 	}
 }

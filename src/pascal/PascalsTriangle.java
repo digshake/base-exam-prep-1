@@ -1,9 +1,9 @@
 package pascal;
 
-import support.cse131.ArgsProcessor;
+import java.util.Scanner;
 
 public class PascalsTriangle {
 	public static void main(String[] args) {
-		
+		 
 	}
 }
