@@ -12,7 +12,7 @@ import support.cse131.Lazy;
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
  */
 public enum ImageResource implements Supplier<BufferedImage> {
-	WASHU_BEAR, YOU_BELONG_HERE, RON_CYTRON, MCKELVEY_HALL;
+	WASHU_BEAR, YOU_BELONG_HERE, DOUG_SHOOK, MCKELVEY_HALL;
 
 	private final Lazy<BufferedImage> lazy = new Lazy<>(() -> {
 		return readImageResource(name().toLowerCase() + ".png");

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.function.UnaryOperator;
 
-import imagetransform.ImageTransforms;
+import nonexam.imagetransform.ImageTransforms;
 
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)

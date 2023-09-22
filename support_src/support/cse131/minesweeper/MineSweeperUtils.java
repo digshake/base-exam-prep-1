@@ -11,10 +11,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import minesweeper.MineSweeper;
+import nonexam.minesweeper.MineSweeper;
 import support.cse131.LenientTextUtils;
 import support.cse131.SystemOutputUtils;
-import test.cse131.Messages;
 
 /**
  * @author Dennis Cosgrove (http://www.cse.wustl.edu/~cosgroved/)
@@ -117,8 +116,7 @@ public class MineSweeperUtils {
 		StringBuilder sb = new StringBuilder();
 		sb.append(header);
 		sb.append("\n");
-		sb.append(Messages.toComplete(actualOutput, Optional.empty(), linesOfTokenLists,
-				(list, i) -> LenientTextUtils.toLine(list.get(i))));
+
 		return sb.toString();
 	}
 	
