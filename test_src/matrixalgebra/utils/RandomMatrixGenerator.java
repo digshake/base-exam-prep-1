@@ -28,18 +28,35 @@ public class RandomMatrixGenerator {
         // // System.out.println(formatFullForTestSuite(matrices, expecteds));
 
         // Add
+        // int[][][] aMatrices = new int[20][][];
+        // int[][][] bMatrices = new int[20][][];
+        // int[][][] expecteds = new int[20][][];
+
+        // for (int i = 0; i < aMatrices.length; ++i) {
+        // aMatrices[i] = generateRandomMatrix();
+        // bMatrices[i] = generateRandomMatrixAdd(aMatrices[i].length,
+        // aMatrices[i][0].length);
+        // expecteds[i] = add(aMatrices[i], bMatrices[i]);
+        // }
+
+        // for (int i = 0; i < aMatrices.length; ++i) {
+        // System.out.println(formatBothMatricesForTestSuite(aMatrices[i], bMatrices[i],
+        // expecteds[i]));
+        // }
+
+        // Multiply
         int[][][] aMatrices = new int[20][][];
         int[][][] bMatrices = new int[20][][];
         int[][][] expecteds = new int[20][][];
-
         for (int i = 0; i < aMatrices.length; ++i) {
             aMatrices[i] = generateRandomMatrix();
-            bMatrices[i] = generateRandomMatrixAdd(aMatrices[i].length, aMatrices[i][0].length);
-            expecteds[i] = add(aMatrices[i], bMatrices[i]);
+            bMatrices[i] = generateRandomMatrixMultiply(aMatrices[i][0].length);
+            expecteds[i] = multiply(aMatrices[i], bMatrices[i]);
         }
 
         for (int i = 0; i < aMatrices.length; ++i) {
-            System.out.println(formatBothMatricesForTestSuite(aMatrices[i], bMatrices[i], expecteds[i]));
+            System.out.println(formatBothMatricesForTestSuite(aMatrices[i], bMatrices[i],
+                    expecteds[i]));
         }
     }
 
@@ -59,6 +76,18 @@ public class RandomMatrixGenerator {
 
     public static int[][] generateRandomMatrixAdd(int rows, int cols) {
         int[][] matrix = new int[rows][cols];
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < cols; ++j) {
+                matrix[i][j] = (int) (Math.random() * 10);
+            }
+        }
+        return matrix;
+    }
+
+    public static int[][] generateRandomMatrixMultiply(int rows) {
+        int cols = (int) (Math.random() * 10 + 1);
+        int[][] matrix = new int[rows][cols];
+
         for (int i = 0; i < rows; ++i) {
             for (int j = 0; j < cols; ++j) {
                 matrix[i][j] = (int) (Math.random() * 10);
@@ -138,6 +167,25 @@ public class RandomMatrixGenerator {
                 ans[i][j] = a[i][j] + b[i][j];
             }
         }
+        return ans;
+    }
+
+    public static int[][] multiply(int[][] a, int[][] b) {
+        if (a[0].length != b.length) {
+            throw new IllegalArgumentException("Matrix dimensions incompatible");
+        }
+
+        int[][] ans = new int[a.length][b[0].length];
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < b[0].length; j++) {
+                int dotProduct = 0;
+                for (int k = 0; k < a[0].length; k++) {
+                    dotProduct += a[i][k] * b[k][j];
+                }
+                ans[i][j] = dotProduct;
+            }
+        }
+
         return ans;
     }
 }

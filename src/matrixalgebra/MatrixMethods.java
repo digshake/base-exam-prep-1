@@ -2,20 +2,6 @@ package matrixalgebra;
 
 public class MatrixMethods {
 
-    // public static int determinant(int[][] a) {
-    // if (a.length != a[0].length) {
-    // throw new IllegalArgumentException("Matrix must be square");
-    // }
-
-    // int leftDiagonal = 1;
-    // int rightDiagonal = 1;
-    // for (int i = 0; i < a.length; i++) {
-    // leftDiagonal *= a[i][i];
-    // rightDiagonal *= a[i][a.length - i - 1];
-    // }
-    // return leftDiagonal - rightDiagonal;
-    // }
-
     public static int[][] transpose(int[][] a) {
         int[][] ans = new int[a[0].length][a.length];
         for (int i = 0; i < a.length; i++) {

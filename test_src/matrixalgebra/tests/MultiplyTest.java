@@ -11,12 +11,12 @@ import org.junit.runners.Parameterized;
 import matrixalgebra.utils.MessageFormat;
 
 @RunWith(Parameterized.class)
-public class AddTest {
+public class MultiplyTest {
     private int[][] a;
     private int[][] b;
     private int[][] expected;
 
-    public AddTest(int[][] a, int[][] b, int[][] expected) {
+    public MultiplyTest(int[][] a, int[][] b, int[][] expected) {
         this.a = a;
         this.b = b;
         this.expected = expected;
@@ -28,21 +28,21 @@ public class AddTest {
         sb.append(MessageFormat.matrixToString(a) + "\n");
         sb.append("Matrix b:\n");
         sb.append(MessageFormat.matrixToString(b) + "\n");
-        sb.append("Expected Sum:\n");
+        sb.append("Expected Product:\n");
         sb.append(MessageFormat.matrixToString(expected) + "\n");
-        sb.append("Actual Sum:\n");
+        sb.append("Actual Product:\n");
         sb.append(MessageFormat.matrixToString(actual) + "\n");
         return sb.toString();
     }
 
     @Test
     public void test() throws Exception {
-        int[][] actual = matrixalgebra.MatrixMethods.add(a, b);
+        int[][] actual = matrixalgebra.MatrixMethods.multiply(a, b);
         assertArrayEquals(formatMatricesForMessage(a, b, expected, actual), expected, actual);
     }
 
     @Parameterized.Parameters(name = "a: {0}; b: {1}; expected: {2};")
     public static Collection<Object[]> getConstructorArguments() {
-        return RandomTestCases.getConstructorArgumentsAdd();
+        return RandomTestCases.getConstructorArgumentsMultiply();
     }
 }

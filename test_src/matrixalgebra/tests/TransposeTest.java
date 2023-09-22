@@ -38,6 +38,6 @@ public class TransposeTest {
 
     @Parameterized.Parameters(name = "matrix: {0}; expected: {1};")
     public static Collection<Object[]> getConstructorArguments() {
-        return TransposeTestCases.getConstructorArguments();
+        return RandomTestCases.getConstructorArgumentsTranspose();
     }
 }
