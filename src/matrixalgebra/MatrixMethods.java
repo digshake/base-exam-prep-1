@@ -2,57 +2,80 @@ package matrixalgebra;
 
 public class MatrixMethods {
 
+    /**
+     * Returns the transpose of a matrix
+     * 
+     * For example, given the matrix:
+     * [ 1 2 3 ]
+     * [ 4 5 6 ]
+     * 
+     * this method would return:
+     * [ 1 4 ]
+     * [ 2 5 ]
+     * [ 3 6 ]
+     * 
+     * @param a the matrix to be transposed
+     * @return the transposition of matrix a
+     */
     public static int[][] transpose(int[][] a) {
-        int[][] ans = new int[a[0].length][a.length];
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a[0].length; j++) {
-                ans[j][i] = a[i][j];
-            }
-        }
-        return ans;
+        // TODO: implement this method to transpose a matrix
+        throw new UnsupportedOperationException("Not Yet Implemented", null);
     }
 
+    /**
+     * Returns the sum of two matrices
+     * 
+     * For example, given the matrices:
+     * a =
+     * [ 1 2 3 ]
+     * [ 4 5 6 ]
+     * 
+     * b =
+     * [ 7 8 9 ]
+     * [ 1 2 3 ]
+     * 
+     * the sum of a and b would be:
+     * 
+     * sum =
+     * [ 8 10 12 ]
+     * [ 5 7 9 ]
+     * 
+     * @param a the first matrix to be summed
+     * @param b the second matrix to be summed
+     * @return the sum of the two matrices
+     */
     public static int[][] add(int[][] a, int[][] b) {
-        if (a.length != b.length || a[0].length != b[0].length) {
-            throw new IllegalArgumentException("Matrix dimensions incompatible");
-        }
-
-        int[][] ans = new int[a.length][a[0].length];
-
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a[0].length; j++) {
-                ans[i][j] = a[i][j] + b[i][j];
-            }
-        }
-        return ans;
+        // TODO: implement this method to add two matrices
+        throw new UnsupportedOperationException("Not Yet Implemented", null);
     }
 
+    /**
+     * Returns the product of two matrices
+     * 
+     * For example, given the matrices:
+     * a =
+     * [1 2 3]
+     * [4 5 6]
+     * 
+     * b =
+     * [7 8]
+     * [9 1]
+     * [2 3]
+     * 
+     * 
+     * the product of a and b would be:
+     * ans =
+     * [31 19]
+     * [85 55]
+     * 
+     * @param a
+     * @param b
+     * @return
+     */
     public static int[][] multiply(int[][] a, int[][] b) {
-        if (a[0].length != b.length) {
-            throw new IllegalArgumentException("Matrix dimensions incompatible");
-        }
+        // TODO: implement this method to multiply two matrices
+        throw new UnsupportedOperationException("Not Yet Implemented", null);
 
-        int[][] ans = new int[a.length][b[0].length];
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < b[0].length; j++) {
-                int dotProduct = 0;
-                for (int k = 0; k < a[0].length; k++) {
-                    dotProduct += a[i][k] * b[k][j];
-                }
-                ans[i][j] = dotProduct;
-            }
-        }
-
-        return ans;
-    }
-
-    public static void printMatrix(int[][] a) {
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a[0].length; j++) {
-                System.out.print(a[i][j] + "\t");
-            }
-            System.out.println();
-        }
     }
 
 }
