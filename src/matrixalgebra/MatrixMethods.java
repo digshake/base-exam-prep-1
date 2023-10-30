@@ -68,9 +68,9 @@ public class MatrixMethods {
      * [31 19]
      * [85 55]
      * 
-     * @param a
-     * @param b
-     * @return
+     * @param a the first matrix to be multiplied
+     * @param b the second matrix to be multiplied
+     * @return the product of matrix a and b
      */
     public static int[][] multiply(int[][] a, int[][] b) {
         // TODO: implement this method to multiply two matrices
@@ -78,4 +78,14 @@ public class MatrixMethods {
 
     }
 
+    /**
+     * Returns the determinant of a matrix
+     * 
+     * @param a integer array to find the determinant of
+     * @return determinant of matrix a
+     */
+    public static int determinant(int[][] a) {
+        // TODO: implement this method to find the determinant of a matrix
+        throw new UnsupportedOperationException("Not Yet Implemented", null);
+    }
 }

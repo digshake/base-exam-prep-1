@@ -432,4 +432,9 @@ public class RandomTestCases {
                                                 { 112, 107, 113, 176, 113, 108, 124, 148, 127 } } });
                 return args;
         }
+
+        public static Collection<Object[]> getConstructorArgumentsDeterminant() {
+                Collection<Object[]> args = new LinkedList<>();
+                return args;
+        }
 }

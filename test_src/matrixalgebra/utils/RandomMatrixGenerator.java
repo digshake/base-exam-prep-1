@@ -45,19 +45,28 @@ public class RandomMatrixGenerator {
         // }
 
         // Multiply
-        int[][][] aMatrices = new int[20][][];
-        int[][][] bMatrices = new int[20][][];
-        int[][][] expecteds = new int[20][][];
-        for (int i = 0; i < aMatrices.length; ++i) {
-            aMatrices[i] = generateRandomMatrix();
-            bMatrices[i] = generateRandomMatrixMultiply(aMatrices[i][0].length);
-            expecteds[i] = multiply(aMatrices[i], bMatrices[i]);
-        }
+        // int[][][] aMatrices = new int[20][][];
+        // int[][][] bMatrices = new int[20][][];
+        // int[][][] expecteds = new int[20][][];
+        // for (int i = 0; i < aMatrices.length; ++i) {
+        // aMatrices[i] = generateRandomMatrix();
+        // bMatrices[i] = generateRandomMatrixMultiply(aMatrices[i][0].length);
+        // expecteds[i] = multiply(aMatrices[i], bMatrices[i]);
+        // }
 
-        for (int i = 0; i < aMatrices.length; ++i) {
-            System.out.println(formatBothMatricesForTestSuite(aMatrices[i], bMatrices[i],
-                    expecteds[i]));
+        // for (int i = 0; i < aMatrices.length; ++i) {
+        // System.out.println(formatBothMatricesForTestSuite(aMatrices[i], bMatrices[i],
+        // expecteds[i]));
+        // }
+
+        // Determinant
+        int[][][] matrices = new int[20][][];
+        int[] expecteds = new int[20];
+        for (int i = 0; i < matrices.length; ++i) {
+            matrices[i] = generateRandomMatrixDeterminant((int) (Math.random() * 8 + 2));
+            expecteds[i] = determinant(matrices[i]);
         }
+        System.out.println(formatFullForTestSuiteWithIntegers(matrices, expecteds));
     }
 
     public static int[][] generateRandomMatrix() {
@@ -94,6 +103,27 @@ public class RandomMatrixGenerator {
             }
         }
         return matrix;
+    }
+
+    public static int[][] generateRandomMatrixDeterminant(int rows) {
+        int[][] matrix = new int[rows][rows];
+
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < rows; ++j) {
+                matrix[i][j] = (int) (Math.random() * 10);
+            }
+        }
+        return matrix;
+    }
+
+    public static String formatFullForTestSuiteWithIntegers(int[][][] matrices, int[] expecteds) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < matrices.length; ++i) {
+            sb.append("args.add( new Object[]{");
+            sb.append(formatMatrixForTestSuite(matrices[i]) + ", " + expecteds[i]);
+            sb.append("});\n");
+        }
+        return sb.toString();
     }
 
     public static String formatFullForTestSuite(int[][][] matrices, int[][][] expecteds) {
@@ -187,5 +217,32 @@ public class RandomMatrixGenerator {
         }
 
         return ans;
+    }
+
+    public static int determinant(int[][] a) {
+        if (a.length <= 2 && a[0].length <= 2) {
+            return a[0][0] * a[1][1] - a[0][1] * a[1][0];
+        }
+
+        int sum = 0;
+        for (int i = 0; i < a.length; ++i) {
+            int[][] subMatrix = new int[a.length - 1][a[0].length - 1];
+            int currentCol = 0;
+            for (int c = 0; c < a.length; ++c) {
+                if (c != i) {
+                    for (int r = 1; r < a.length; ++r) {
+                        subMatrix[r - 1][currentCol] = a[r][c];
+                    }
+                    currentCol++;
+                }
+            }
+            if (i % 2 == 0) {
+                sum += a[0][i] * determinant(subMatrix);
+            } else {
+                sum -= a[0][i] * determinant(subMatrix);
+            }
+        }
+
+        return sum;
     }
 }
